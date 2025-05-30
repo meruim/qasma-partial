@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Layout</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header overlay to cover the original header -->
+      <div class="header-overlay"></div>
+
+      <!-- Back arrow button with SVG -->
+      <button class="back-arrow-btn" onclick="goBack()" aria-label="Go back">
+        <svg
+          class="back-arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>
+      </button>
+
+      <!-- Editable title overlay -->
+      <button class="title-overlay" id="titleButton" onclick="editTitle()">
+        Dashboard
+      </button>
+
+      <!-- Hidden input for editing title -->
+      <input
+        type="text"
+        class="title-input"
+        id="titleInput"
+        value="Dashboard"
+        onblur="saveTitle()"
+        onkeydown="handleKeyPress(event)"
+      />
+
+      <!-- Dashboard image -->
+      <img
+        src="../../assets/img/Dashboard.png"
+        alt="Dashboard"
+        class="dashboard-image"
+      />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

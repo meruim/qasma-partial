@@ -130,8 +130,8 @@ document
 
     const toastElement = document.getElementById("successToast");
     const toast = new bootstrap.Toast(toastElement);
-    document.querySelector(".toast-body").textContent =
-      "Your new message here!";
+    toastElement.querySelector(".toast-body").textContent =
+      "Logout successfully!";
 
     toast.show();
 

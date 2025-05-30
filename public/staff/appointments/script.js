@@ -256,3 +256,18 @@ document.querySelector(".logout-link").addEventListener("click", function (e) {
   );
   deleteModal.show();
 });
+
+document
+  .querySelector(".dashboard-link")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+
+    window.location.href = "/staff/dashboard";
+  });
+document
+  .querySelector(".notification-btn")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+
+    window.location.href = "/staff/notification";
+  });
