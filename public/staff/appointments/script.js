@@ -170,9 +170,36 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.body.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-cancel")) {
-      var appointmentModal = new bootstrap.Modal(
-        document.getElementById("deleteAppointmentModal")
-      );
+      const modalEl = document.getElementById("deleteAppointmentModal");
+
+      // Reset modal content for cancel
+      const modalBody = modalEl.querySelector(".modal-body");
+      modalBody.innerHTML = `
+          <h6>Are you sure you want to cancel this appointment?</h6>
+          <p>This action cannot be undone.</p>
+        `;
+
+      // Unbind previous onclick (if any)
+      const yesBtn = document.getElementById("modalYes");
+      const newYesBtn = yesBtn.cloneNode(true);
+      yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
+
+      newYesBtn.addEventListener("click", function () {
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        modalInstance.hide();
+
+        const toastElement = document.getElementById("successToast");
+        const toast = new bootstrap.Toast(toastElement);
+        document.querySelector(".toast-body").textContent =
+          "Appointment cancelled successfully!";
+        toast.show();
+
+        setTimeout(() => {
+          toast.hide();
+        }, 1000);
+      });
+
+      const appointmentModal = new bootstrap.Modal(modalEl);
       appointmentModal.show();
     }
   });
