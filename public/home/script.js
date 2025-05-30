@@ -17,8 +17,7 @@ function selectRole(role) {
         window.location.href = "/staff/login";
         break;
       case "counselor":
-        alert("Redirecting to Counselor Login...");
-        // window.location.href = '/counselor-login';
+        window.location.href = '/counselor-login';
         break;
     }
 
