@@ -264,6 +264,7 @@ document
 
     window.location.href = "/staff/dashboard";
   });
+
 document
   .querySelector(".notification-btn")
   .addEventListener("click", function (e) {
