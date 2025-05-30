@@ -1,0 +1,482 @@
+:root {
+  --primary-green: #32a616;
+  --dark-green: #175608;
+  --light-green: #a5fba5;
+  --navy: #1a202c;
+  --red: #de4c47;
+  --blue: #0f65b3;
+  --gray: #484848;
+  --sidebar-gray: #e5e5e5;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  max-width: 375px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.sidebar {
+  width: 280px;
+  background-color: var(--sidebar-gray);
+  height: 100vh;
+  position: fixed;
+  left: -280px;
+  top: 0;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  background-color: var(--light-green);
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.staff-title {
+  color: var(--primary-green);
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
+  margin: 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-menu a:hover {
+  background-color: #d0d0d0;
+}
+
+.sidebar-menu i {
+  width: 20px;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.logout-link {
+  color: var(--red) !important;
+}
+
+.main-content {
+  flex: 1;
+  background-color: var(--light-green);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.header {
+  background-color: var(--primary-green);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.header-title {
+  color: white;
+  font-weight: bold;
+  margin: 0;
+  font-size: 16px;
+}
+
+.notification-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.content-area {
+  padding: 20px;
+}
+
+.date-status-card {
+  background: #fefefe;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.date-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(50, 166, 22, 0.3);
+}
+
+.date-section i {
+  color: #666;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.date-text {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.status-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.status-approved .status-icon {
+  background-color: var(--primary-green);
+  color: white;
+}
+
+.status-pending .status-icon {
+  background-color: #ffc107;
+  color: white;
+}
+
+.status-cancelled .status-icon {
+  background-color: var(--red);
+  color: white;
+}
+
+.status-approval .status-icon {
+  background-color: var(--primary-green);
+  color: white;
+}
+
+.status-tabs {
+  display: flex;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.status-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  background: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.status-tab.active {
+  border-bottom: var(--navy) solid 2px;
+  color: var(--dark-green);
+}
+
+.appointments-section {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #f8f9fa;
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.appointment-date {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.pending-badge {
+  color: #ffc107;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.approved-badge {
+  color: var(--primary-green);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.cancelled-badge {
+  color: var(--red);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.appointment-details h6 {
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+
+.appointment-details p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-accept {
+  background-color: var(--primary-green);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.btn-reschedule {
+  background-color: var(--blue);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.btn-cancel {
+  background-color: var(--red);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.bottom-sheet {
+  background: white;
+  width: 100%;
+  max-width: 375px;
+  border-radius: 20px 20px 0 0;
+  padding: 25px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+  margin: 0;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.datetime-select {
+  width: 100%;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 15px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.reason-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.reason-textarea::placeholder {
+  color: #999;
+}
+
+.reschedule-btn {
+  width: 100%;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.reschedule-btn:hover {
+  background-color: #0d5aa0;
+}
+
+.reschedule-btn:active {
+  transform: translateY(1px);
+}

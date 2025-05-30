@@ -1,0 +1,46 @@
+/* Custom Modal Styles */
+.modal-content {
+  border-radius: 15px; /* Rounded corners for a modern look */
+  padding: 10px;
+}
+
+/* Adjust the padding for smaller screens like iPhone */
+.modal-body {
+  padding: 15px; /* Add padding inside modal body */
+}
+
+/* Modal header and footer adjustments */
+.modal-header,
+.modal-footer {
+  padding: 10px 20px;
+}
+
+/* Ensure modal dialog centers and doesn't overflow */
+.modal-dialog {
+  max-width: 90%; /* Width adjustment for smaller screens */
+  margin: 0 auto; /* Center the modal */
+}
+
+/* Ensures modal fits the screen better on small devices like iPhone */
+@media (max-width: 375px) {
+  .modal-content {
+    padding: 8px;
+  }
+  .modal-header,
+  .modal-footer {
+    padding: 8px 16px;
+  }
+  .modal-body {
+    padding: 12px;
+  }
+}
+
+/* Responsive font-size adjustments for iPhone */
+@media (max-width: 375px) {
+  .modal-title {
+    font-size: 16px; /* Slightly smaller title text for small screens */
+  }
+  .modal-body p {
+    font-size: 14px; /* Adjust body text for smaller screens */
+  }
+}

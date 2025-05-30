@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Appointment</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Toast Notification - Top Center -->
+    <div
+      class="position-fixed top-0 start-50 translate-middle-x p-3"
+      style="z-index: 1055"
+    >
+      <div
+        id="successToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Appointment created successfully!</div>
+        </div>
+      </div>
+    </div>
+    <div class="appointment-container">
+      <!-- Header -->
+      <div class="header">
+        <button class="back-button">
+          <svg
+            class="back-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="m12 19-7-7 7-7" />
+            <path d="M19 12H5" />
+          </svg>
+        </button>
+        <h1 class="header-title">New Appointment</h1>
+      </div>
+
+      <!-- Form Content -->
+      <div class="form-content">
+        <form>
+          <!-- Appointment Category -->
+          <div class="form-group">
+            <label class="form-label">Appointment Category</label>
+            <div class="category-display">Testing</div>
+          </div>
+
+          <!-- Date & Time -->
+          <div class="form-group">
+            <label class="form-label">Date & Time</label>
+            <select class="form-select">
+              <option selected>Select a convenient date and time</option>
+              <option value="today-10am">Today, 10:00 AM</option>
+              <option value="today-2pm">Today, 2:00 PM</option>
+              <option value="tomorrow-9am">Tomorrow, 9:00 AM</option>
+              <option value="tomorrow-1pm">Tomorrow, 1:00 PM</option>
+              <option value="tomorrow-3pm">Tomorrow, 3:00 PM</option>
+            </select>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <div class="description-help">
+              Provide a brief description of your feelings to help the counselor
+              understand your needs.
+            </div>
+            <textarea
+              class="form-textarea"
+              placeholder="Write something here..."
+              rows="4"
+            ></textarea>
+          </div>
+
+          <!-- Appointment Type -->
+          <div class="form-group">
+            <label class="form-label">Appointment Type</label>
+            <div class="appointment-type-help">
+              Choose the type of counseling session that best fits your needs.
+            </div>
+            <select class="form-select">
+              <option selected>Select a appointment type</option>
+              <option value="individual">Individual Counseling</option>
+              <option value="group">Group Counseling</option>
+              <option value="career">Career Guidance</option>
+              <option value="academic">Academic Support</option>
+              <option value="personal">Personal Counseling</option>
+              <option value="crisis">Crisis Intervention</option>
+            </select>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-submit">Appoint Now</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .querySelector(".btn-cancel")
+        .addEventListener("click", function () {
+          window.history.back();
+        });
+      document
+        .querySelector(".back-arrow")
+        .addEventListener("click", function () {
+          console.log("Back button clicked");
+          window.history.back();
+        });
+
+      // Add form submission handler
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form values
+        const selects = document.querySelectorAll("select.form-select");
+        const dateTime = selects[0].value;
+        const appointmentType = selects[1].value;
+        const description = document.querySelector(".form-textarea").value;
+
+        // Basic validation
+        if (dateTime === "Select a convenient date and time") {
+          alert("Please select a date and time");
+          return;
+        }
+
+        if (appointmentType === "Select a appointment type") {
+          alert("Please select an appointment type");
+          return;
+        }
+
+        if (description.trim() === "") {
+          alert("Please provide a description");
+          return;
+        }
+
+        // Show Bootstrap Toast
+        const toastElement = document.getElementById("successToast");
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        // Wait 1 second, then redirect
+        setTimeout(() => {
+          toast.hide();
+          window.location.href = "/student/appointments"; // <-- Replace with your redirect path
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

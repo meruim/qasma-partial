@@ -1,0 +1,208 @@
+body {
+  background-color: #e8e8e8;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.mobile-container {
+  max-width: 375px;
+  height: 667px;
+  margin: 0 auto;
+  background-color: #e8e8e8;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(20, 23, 20, 0.15);
+  overflow: hidden;
+}
+
+/* Logo Section - Now positioned at the top */
+.logo-container {
+  text-align: center;
+  padding: 20px 20px 10px;
+  background-color: #e8e8e8;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(20, 23, 20, 0.25);
+}
+
+.logo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+}
+
+.logo-placeholder i {
+  color: #d9c23f;
+  font-size: 36px;
+  text-shadow: 1px 1px 2px rgba(20, 23, 20, 0.5);
+}
+
+/* Header Section - Now below the logo */
+.header-section {
+  background-color: #e8e8e8;
+  padding: 15px 15px 10px;
+  text-align: center;
+  position: relative;
+}
+
+.university-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #32a616;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+
+.app-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #4f3a33;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+
+.campus-info {
+  font-size: 11px;
+  font-weight: bold;
+  color: #d9c23f;
+  margin-bottom: 8px;
+  letter-spacing: 0.4px;
+}
+
+/* Student Section - Removed borders */
+.student-section {
+  background-color: #e8e8e8;
+  padding: 8px 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.student-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #141714;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.form-container {
+  padding: 0 25px;
+}
+
+.form-control {
+  border: 1px solid #b8b8b8;
+  border-radius: 3px;
+  padding: 11px 12px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  color: #141714;
+  font-family: Arial, sans-serif;
+}
+
+.form-control::placeholder {
+  color: #888;
+  font-size: 13px;
+}
+
+.form-control:focus {
+  border-color: #32a616;
+  outline: none;
+}
+
+.login-btn {
+  background-color: #32a616;
+  border: none;
+  color: white;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.login-btn:hover {
+  background-color: #2a8f13;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.forgot-password a {
+  color: #4f3a33;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+  color: #32a616;
+}
+
+.create-account-btn {
+  background-color: #f8f8f8;
+  border: 1px solid #b8b8b8;
+  color: #4f3a33;
+  padding: 11px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.create-account-btn:hover {
+  background-color: #e8e8e8;
+  color: #141714;
+}
+
+.loading {
+  display: none;
+}
+
+.loading.show {
+  display: inline-block;
+}
+
+/* Horizontal line separators */
+.separator {
+  height: 1px;
+  background-color: #d0d0d0;
+  margin: 0;
+}

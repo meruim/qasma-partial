@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JRMSU-KC QASMA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style></style>
+  </head>
+  <body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Jane Doe</h3>
+        <button class="sidebar-close" id="sidebarClose">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-calendar-alt sidebar-menu-icon"></i>
+            Appointments
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-user sidebar-menu-icon"></i>
+            My profile
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-history sidebar-menu-icon"></i>
+            History
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-shield-alt sidebar-menu-icon"></i>
+            Privacy Policy
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-file-contract sidebar-menu-icon"></i>
+            Terms And Condition
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link">
+            <i class="fas fa-cog sidebar-menu-icon"></i>
+            Settings
+          </a>
+        </li>
+        <li class="sidebar-menu-item">
+          <a href="#" class="sidebar-menu-link logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
+            Log-out
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+      <div class="header">
+        <button class="hamburger" id="hamburgerBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>JRMSU-KC QASMA</h1>
+        <button class="notification">
+          <i class="fas fa-bell"></i>
+        </button>
+      </div>
+
+      <div class="greeting-section">
+        <div class="greeting-title">Good Morning Gemma👋</div>
+        <p class="greeting-subtitle">
+          Hope you're having a great day! How can we assist you today?
+        </p>
+      </div>
+
+      <div class="appointments-section">
+        <div class="section-title">My Appointments</div>
+
+        <div class="appointment-card">
+          <div class="appointment-content">
+            <div class="appointment-date">December 25, 2024</div>
+            <div class="appointment-time">10:30 am</div>
+            <div class="appointment-type">Counselling</div>
+            <div class="appointment-subtype">Appointment Type: Unknown</div>
+            <div class="status-approved">Approved</div>
+          </div>
+          <div class="right-content">
+            <div class="qr-code" id="qrCodeContainer" style="cursor: pointer">
+              <a
+                href="/path-to-qr-action"
+                class="qr-icon"
+                title="View QR Code"
+                id="qrLink"
+              >
+                <i class="fas fa-qrcode fa-3x"></i>
+              </a>
+            </div>
+            <div class="qr-label">QR Code</div>
+            <div class="action-buttons">
+              <button class="btn-cancel">✕Cancel</button>
+              <button class="btn-reschedule">🔄Reschedule</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="appointment-card">
+          <div class="appointment-content">
+            <div class="appointment-date">December 25, 2024</div>
+            <div class="appointment-time">10:30 am</div>
+            <div class="appointment-type">Counselling</div>
+            <div class="appointment-subtype">Appointment Type: Unknown</div>
+            <div class="status-pending">Pending</div>
+          </div>
+          <div class="right-content">
+            <div class="qr-code" id="qrCodeContainer" style="cursor: pointer">
+              <a
+                href="/path-to-qr-action"
+                class="qr-icon"
+                title="View QR Code"
+                id="qrLink"
+              >
+                <i class="fas fa-qrcode fa-3x"></i>
+              </a>
+            </div>
+            <div class="qr-label">QR Code</div>
+            <div class="action-buttons">
+              <button class="btn-cancel">✕Cancel</button>
+              <button class="btn-reschedule">🔄Reschedule</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="show-history">
+          <button>Show History</button>
+        </div>
+      </div>
+
+      <button class="fab" id="fabBtn">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+    <div class="notification-container" id="notification" style="display: none">
+      <div class="notification-message">Success! Logout completed.</div>
+    </div>
+
+    <!-- Appointment Category Modal -->
+    <div
+      class="modal fade"
+      id="appointmentCategoryModal"
+      tabindex="-1"
+      aria-labelledby="appointmentCategoryModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body pb-0">
+            <h3 class="fw-bold mb-1">Select Your Appointment Category</h3>
+            <p class="text-muted mb-4">Choose an option below:</p>
+
+            <div
+              class="category-option mb-3 p-3 border rounded d-flex align-items-center"
+              id="counselingOption"
+            >
+              <div class="category-icon me-3">
+                <i class="fas fa-comments fs-4"></i>
+              </div>
+              <div class="category-details">
+                <h5 class="mb-1">Counseling</h5>
+                <p class="mb-0 small text-muted">
+                  Professional support to address emotional, mental, or personal
+                  challenges in a safe environment.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="category-option mb-3 p-3 border rounded d-flex align-items-center"
+              id="testingOption"
+            >
+              <div class="category-icon me-3">
+                <i class="fas fa-clipboard-list fs-4"></i>
+              </div>
+              <div class="category-details">
+                <h5 class="mb-1">Testing</h5>
+                <p class="mb-0 small text-muted">
+                  Accurate evaluations to better understand your mental health
+                  and create personalized plans.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center border-0">
+            <button
+              type="button"
+              class="btn btn-link text-dark fw-bold"
+              data-bs-dismiss="modal"
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div
+      class="modal fade"
+      id="logoutModal"
+      tabindex="-1"
+      aria-labelledby="logoutModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Are you sure you want to log out?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+            <button type="button" class="btn btn-danger" id="confirmLogoutBtn">
+              Yes
+            </button>
+            <!-- Replace with your logout URL -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Appointment Modal -->
+    <!-- Delete Appointment Modal -->
+    <div
+      class="modal fade"
+      id="deleteAppointmentModal"
+      tabindex="-1"
+      aria-labelledby="deleteAppointmentModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body pb-0 text-center">
+            <!-- Centering text -->
+            <h3 class="fw-bold mb-1">
+              Are you sure you want to delete this appointment?
+            </h3>
+            <p class="text-muted mb-4">This action cannot be undone.</p>
+          </div>
+          <div class="modal-footer justify-content-end border-0">
+            <!-- Right-aligning buttons -->
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification - Top Center -->
+    <div
+      class="position-fixed top-0 start-50 translate-middle-x p-3"
+      style="z-index: 1055"
+    >
+      <div
+        id="successToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Appointment created successfully!</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script></script>
+    <script src="script.js"></script>
+  </body>
+</html>

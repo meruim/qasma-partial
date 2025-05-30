@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JRMSU Login Selection</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="header-section">
+        <div class="university-logo">
+          <div class="logo-placeholder">
+            <img src="../assets/img/logo.svg" alt="" />
+          </div>
+        </div>
+        <div class="university-name">JOSE RIZAL MEMORIAL STATE UNIVERSITY</div>
+        <div class="app-title">
+          QR CODE-ENABLE APPOINTMENT AND SCHEDULING MANAGER APPLICATION
+        </div>
+        <div class="campus-info">KATIPUNAN CAMPUS, Z.N</div>
+      </div>
+
+      <!-- Login Title -->
+      <h1 class="login-title">LOGIN AS</h1>
+
+      <!-- Role Selection Buttons -->
+      <div class="role-buttons">
+        <button class="role-btn" onclick="selectRole('student')">
+          <i class="fas fa-user-graduate me-2"></i>
+          Student
+        </button>
+
+        <button class="role-btn" onclick="selectRole('staff')">
+          <i class="fas fa-user-tie me-2"></i>
+          Staff
+        </button>
+
+        <button class="role-btn" onclick="selectRole('counselor')">
+          <i class="fas fa-user-md me-2"></i>
+          Counselor
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

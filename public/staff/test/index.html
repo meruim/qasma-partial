@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bottom Sheet Modal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-green: #32a616;
+        --light-green: #a5fba5;
+        --blue: #0f65b3;
+        --gray: #484848;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: var(--light-green);
+        margin: 0;
+        padding: 20px;
+        max-width: 375px;
+        margin: 0 auto;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .bottom-sheet {
+        background: white;
+        width: 100%;
+        max-width: 375px;
+        border-radius: 20px 20px 0 0;
+        padding: 25px;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease-out;
+        margin: 0;
+        position: relative;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #666;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-subtitle {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 25px;
+        line-height: 1.4;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .datetime-select {
+        width: 100%;
+        padding: 15px;
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #333;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 15px center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        cursor: pointer;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .reason-textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 15px;
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #333;
+        resize: none;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .reason-textarea::placeholder {
+        color: #999;
+      }
+
+      .reschedule-btn {
+        width: 100%;
+        background-color: var(--blue);
+        color: white;
+        border: none;
+        padding: 18px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 10px;
+      }
+
+      .reschedule-btn:hover {
+        background-color: #0d5aa0;
+      }
+
+      .reschedule-btn:active {
+        transform: translateY(1px);
+      }
+
+      /* Remove default margins and ensure full width */
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Demo button to show modal -->
+    <button
+      onclick="showModal()"
+      style="
+        background: var(--blue);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      "
+    >
+      Show Bottom Sheet Modal
+    </button>
+
+    <!-- Bottom Sheet Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display: none">
+      <div class="bottom-sheet">
+        <div class="modal-header">
+          <h2 class="modal-title">Reschedule Appointment</h2>
+          <button class="close-btn" onclick="hideModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <p class="modal-subtitle">
+          Choose a New Appointment Time to Reschedule.
+        </p>
+
+        <form>
+          <div class="form-group">
+            <select class="datetime-select">
+              <option>DEC 25, 2024 10:00 AM (WED)</option>
+              <option>DEC 26, 2024 09:00 AM (THU)</option>
+              <option>DEC 26, 2024 10:00 AM (THU)</option>
+              <option>DEC 26, 2024 11:00 AM (THU)</option>
+              <option>DEC 27, 2024 09:00 AM (FRI)</option>
+              <option>DEC 27, 2024 10:00 AM (FRI)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Reason for reschedule:</label>
+            <textarea
+              class="reason-textarea"
+              placeholder="Please explain the reason for this action."
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            class="reschedule-btn"
+            onclick="handleReschedule()"
+          >
+            Reschedule
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function handleReschedule() {
+        const selectedTime = document.querySelector(".datetime-select").value;
+        const reason = document.querySelector(".reason-textarea").value;
+
+        if (!reason.trim()) {
+          alert("Please provide a reason for rescheduling.");
+          return;
+        }
+
+        alert(`Appointment rescheduled to: ${selectedTime}\nReason: ${reason}`);
+        hideModal();
+      }
+
+      //HANDLE MODAL
+
+      function showModal() {
+        document.getElementById("modalOverlay").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      function hideModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("modalOverlay")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            hideModal();
+          }
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          hideModal();
+        }
+      });
+    </script>
+  </body>
+</html>
