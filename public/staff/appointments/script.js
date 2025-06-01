@@ -6,9 +6,25 @@ function handleReschedule() {
     alert("Please provide a reason for rescheduling.");
     return;
   }
+  const loader = document.createElement("my-loader");
+  document.body.appendChild(loader);
 
-  alert(`Appointment rescheduled to: ${selectedTime}\nReason: ${reason}`);
-  hideModal();
+  setTimeout(() => {
+    loader.remove();
+    hideModal();
+  }, 500);
+
+  setTimeout(() => {
+    const toastElement = document.getElementById("successToast");
+    const toast = new bootstrap.Toast(toastElement);
+    document.querySelector(".toast-body").textContent =
+      "Appointment has been reschedule successfully!";
+    toast.show();
+
+    setTimeout(() => {
+      toast.hide();
+    }, 2000);
+  }, 500);
 }
 
 //HANDLE MODAL
@@ -155,14 +171,25 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.body.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-accept")) {
-      const toastElement = document.getElementById("successToast");
-      const toast = new bootstrap.Toast(toastElement);
-      toast.show();
+      if (!document.querySelector("my-loader")) {
+        const loader = document.createElement("my-loader");
+        document.body.appendChild(loader);
 
-      // Simulate login process
+        setTimeout(() => {
+          loader.remove();
+        }, 500);
+      }
       setTimeout(() => {
-        toast.hide();
-      }, 2000);
+        const toastElement = document.getElementById("successToast");
+        const toast = new bootstrap.Toast(toastElement);
+        document.querySelector(".toast-body").textContent =
+          "Appointment has been successfully accepted!";
+        toast.show();
+
+        setTimeout(() => {
+          toast.hide();
+        }, 2000);
+      }, 500);
     }
   });
 });
@@ -265,10 +292,20 @@ document
     window.location.href = "/staff/dashboard";
   });
 
+//notification
 document
   .querySelector(".notification-btn")
   .addEventListener("click", function (e) {
     e.preventDefault();
 
-    window.location.href = "/staff/notification";
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
+
+      // Remove loader after 3 seconds
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/staff/notification";
+      }, 500);
+    }
   });

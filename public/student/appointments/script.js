@@ -93,7 +93,16 @@ function handleSwipe() {
 
 // Notification button
 document.querySelector(".notification").addEventListener("click", () => {
-  window.location.href = "/student/notification ";
+  if (!document.querySelector("my-loader")) {
+    const loader = document.createElement("my-loader");
+    document.body.appendChild(loader);
+
+    // Remove loader after 3 seconds
+    setTimeout(() => {
+      loader.remove();
+      window.location.href = "/student/notification ";
+    }, 500);
+  }
 });
 
 // Initialize app
@@ -181,12 +190,17 @@ document.getElementById("fabBtn").addEventListener("click", function () {
 });
 
 // Event Listener for category options
-document
-  .getElementById("counselingOption")
-  .addEventListener("click", function () {
-    window.location.href = "/student/new-appointment";
-  });
+["counselingOption", "testingOption"].forEach((id) => {
+  document.getElementById(id).addEventListener("click", () => {
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
 
-document.getElementById("testingOption").addEventListener("click", function () {
-  window.location.href = "/student/new-appointment";
+      // Remove loader after 3 seconds
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/student/new-appointment";
+      }, 1000);
+    }
+  });
 });
