@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       loadingSpinner.classList.remove("show");
       loginBtn.disabled = false;
       toast.hide();
-      window.location.href = "/staff/appointments";
+      window.location.href = "/counselor/appointments";
     }, 2000);
   });
 
