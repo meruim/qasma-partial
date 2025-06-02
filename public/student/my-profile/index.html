@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="header">
+        <button class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h2 class="header-title">My profile</h2>
+      </div>
+
+      <div class="profile-form">
+        <div class="form-field" onclick="editField('firstName')">
+          <p class="field-label">First Name</p>
+          <div class="field-value-container">
+            <p class="field-value">Gemma</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('lastName')">
+          <p class="field-label">Last Name</p>
+          <div class="field-value-container">
+            <p class="field-value">Tubigon</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('middleInitial')">
+          <p class="field-label">M.I</p>
+          <div class="field-value-container">
+            <p class="field-value">L</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('suffix')">
+          <p class="field-label">Suffix</p>
+          <div class="field-value-container">
+            <p class="field-value not-set">Not Set</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('idNumber')">
+          <p class="field-label">ID Number</p>
+          <div class="field-value-container">
+            <p class="field-value">KC-A-0091</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field course-field" onclick="editField('course')">
+          <p class="field-label">Course</p>
+          <div class="field-value-container">
+            <p class="field-value">Bachelor Of Science in Information System</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('yearLevel')">
+          <p class="field-label">Year Level</p>
+          <div class="field-value-container">
+            <p class="field-value">3</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-field" onclick="editField('block')">
+          <p class="field-label">Block</p>
+          <div class="field-value-container">
+            <p class="field-value">B</p>
+            <i class="fas fa-pencil-alt edit-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function editField(fieldName) {
+        // Get the field element
+        const fieldElement = event.currentTarget;
+        const valueElement = fieldElement.querySelector(".field-value");
+        const currentValue = valueElement.textContent;
+
+        // Create input element
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue === "Not Set" ? "" : currentValue;
+        input.style.cssText = `
+                background: white;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 5px 8px;
+                font-size: 14px;
+                width: 150px;
+                text-align: right;
+            `;
+
+        // Replace value with input
+        valueElement.style.display = "none";
+        valueElement.parentNode.insertBefore(input, valueElement);
+        input.focus();
+        input.select();
+
+        // Handle save on Enter or blur
+        function saveValue() {
+          const newValue = input.value.trim();
+          valueElement.textContent = newValue || "Not Set";
+          valueElement.className = newValue
+            ? "field-value"
+            : "field-value not-set";
+          valueElement.style.display = "block";
+          input.remove();
+        }
+
+        input.addEventListener("blur", saveValue);
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            saveValue();
+          }
+        });
+      }
+
+      // Back button functionality
+      document.querySelector(".back-btn").addEventListener("click", () => {
+        window.history.back();
+      });
+    </script>
+  </body>
+</html>

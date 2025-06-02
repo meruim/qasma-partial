@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Layout</title>
+    <title>Settings</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
       <div class="header-overlay"></div>
 
       <!-- Back arrow button with SVG -->
-      <button class="back-arrow-btn" aria-label="Go back">
+      <button class="back-arrow-btn" onclick="goBack()" aria-label="Go back">
         <svg
           class="back-arrow"
           viewBox="0 0 24 24"
@@ -25,27 +25,25 @@
         </svg>
       </button>
 
-      <!-- Editable title overlay -->
-      <button class="title-overlay" id="titleButton" onclick="editTitle()">
-        Dashboard
-      </button>
+      <div class="header-overlay">
+        <h2 class="static-title">Settings</h2>
+      </div>
 
-      <!-- Hidden input for editing title -->
-      <input
-        type="text"
-        class="title-input"
-        id="titleInput"
-        value="Dashboard"
-        onblur="saveTitle()"
-        onkeydown="handleKeyPress(event)"
-      />
+      <div class="container mt-2">
+        <div class="header">
+          <h1>Account</h1>
+        </div>
 
-      <!-- Dashboard image -->
-      <img
-        src="../../assets/img/Dashboard.png"
-        alt="Dashboard"
-        class="dashboard-image"
-      />
+        <a href="#" class="menu-item">
+          <span>Personal Details</span>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <a href="#" class="menu-item">
+          <span>Change Password</span>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
     </div>
 
     <script src="script.js"></script>

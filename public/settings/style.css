@@ -1,0 +1,135 @@
+:root {
+  --primary-green: #32a616;
+  --light-green: #a5fba5;
+  --dark: #333333;
+  --light: #f8f9fa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--light);
+  max-width: 375px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Back arrow button */
+.back-arrow-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.back-arrow-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.back-arrow-btn:active {
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+}
+
+.back-arrow {
+  width: 24px;
+  height: 24px;
+  color: var(--dark);
+}
+
+.static-title {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+  user-select: none;
+  pointer-events: none;
+  z-index: 10;
+  font-family: inherit;
+}
+
+/* Optional: Add a subtle border or shadow */
+.dashboard-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header overlay to cover the original header */
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1; /* reduced to be behind buttons */
+  background-color: white; /* add background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  max-width: 375px; /* fit your max-width in body */
+  padding: 70px 0 0 0; /* padding-top to clear fixed header */
+}
+
+.header {
+  padding: 15px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header h1 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #e6e6e6;
+  border-bottom: 1px solid #d9d9d9;
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  background-color: #dedede;
+  color: #333;
+}
+
+.menu-item span {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.menu-item i {
+  color: #888;
+}

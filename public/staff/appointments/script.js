@@ -288,8 +288,32 @@ document
   .querySelector(".dashboard-link")
   .addEventListener("click", function (e) {
     e.preventDefault();
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
 
-    window.location.href = "/staff/dashboard";
+      // Remove loader after 3 seconds
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/staff/dashboard";
+      }, 500);
+    }
+  });
+
+document
+  .querySelector(".settings-link")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
+
+      // Remove loader after 3 seconds
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/settings";
+      }, 500);
+    }
   });
 
 //notification
