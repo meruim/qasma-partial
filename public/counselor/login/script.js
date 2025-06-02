@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginText = document.querySelector(".login-text");
   const loadingSpinner = document.querySelector(".loading");
   const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+  const roleSelection = document.getElementById("roleSelection");
   const createAccountBtn = document.getElementById("createAccountBtn");
 
   // Login form submission
@@ -43,6 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
   forgotPasswordLink.addEventListener("click", function (e) {
     e.preventDefault();
     alert("Forgot Password not implemented!");
+  });
+
+  roleSelection.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/";
+      }, 500);
+    }
   });
 
   // Create account button
@@ -83,4 +96,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-

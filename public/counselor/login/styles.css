@@ -156,10 +156,15 @@ body {
 
 .forgot-password {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 5rem;
 }
 
-.forgot-password a {
+.back-role-selection {
+  text-align: center;
+}
+
+.forgot-password a,
+.back-role-selection a {
   color: #4f3a33;
   text-decoration: none;
   font-size: 12px;
