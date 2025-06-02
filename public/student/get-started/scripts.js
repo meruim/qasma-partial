@@ -37,14 +37,22 @@ document
     }
 
     // Success
-    alert("Registration successful!");
-    window.location.href = "/create-account";
+    if (!document.querySelector("my-loader")) {
+      const loader = document.createElement("my-loader");
+      document.body.appendChild(loader);
+
+      // Remove loader after 3 seconds
+      setTimeout(() => {
+        loader.remove();
+        window.location.href = "/student/create-account";
+      }, 500);
+    }
   });
 
 // Login link functionality
 function goToLogin() {
   console.log("Redirecting to login page");
-  window.location.href = "/login";
+  window.location.href = "/student/login";
 }
 
 // Real-time password confirmation validation
