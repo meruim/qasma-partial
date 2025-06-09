@@ -1,10 +1,10 @@
 # 📄 Documentation
 
-* [`api/register`] => text(register an account)
+* [`api/register`](#api-register) => text(register an account)
 
 ---
 
-## [`api/register`]
+## `api/register`
 
 ### ▶️ Description  
 Registers a new user account by accepting user details and returning a confirmation response.
