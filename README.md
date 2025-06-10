@@ -15,19 +15,27 @@ Registers a new user account by accepting user details and returning a confirmat
 
 The request body must be a JSON object containing the following fields:
 
-| Field            | Type   | Required | Description                               |
-|------------------|--------|----------|-----------------------------------------|
-| `email`          | string | Yes      | User's valid email address.              |
-| `username`       | string | Yes      | Desired username for the account.       |
-| `password`       | string | Yes      | User's password (securely hashed).      |
-| `contact_number` | string | No       | User's phone number including country code. |
-| `date_of_birth`  | string | No       | User's birth date in `YYYY-MM-DD` format. |
-| `suffix`         | string | No       | Name suffix (e.g., Jr., Sr., III).      |
-| `last_name`      | string | Yes      | User's family name.                      |
-| `first_name`     | string | Yes      | User's given name.                       |
-| `year_level`     | string | No       | Current academic year or standing.      |
-| `course`         | string | No       | Academic course or program enrolled.    |
-| `idNumber`       | string | No       | Institution-issued identification number.|
+# UserStudentSchema Fields
+
+- **idNumber**: `string` => required
+- **email**: `string` => required
+- **password**: `string` => required
+- **role**: `string` => not required (default: 'student')
+- **isVerified**: `boolean` => not required (default: false)
+- **isActive**: `boolean` => not required (default: false)
+- **course**: `string` => required
+- **block**: `string` => not required
+- **year_level**: `number` => required
+- **first_name**: `string` => required
+- **last_name**: `string` => required
+- **middle_name**: `string` => not required
+- **suffix**: `string` => required
+- **gender**: `string` => not required (default: 'other')
+- **date_of_birth**: `date` => required
+- **address**: `string` => not required
+- **contact_number**: `string` => required
+- **facebook**: `string` => not required
+
 
 ---
 
