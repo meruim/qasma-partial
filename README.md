@@ -1,6 +1,7 @@
 # 📄 Documentation
 
 - [`[POST] /api/register`](#post-apiregister) => text(register an account)
+- [`[POST] /api/login`](#post-apilogin) => text(register an account)
 
 ---
 
@@ -44,5 +45,20 @@ The request body must be a JSON object containing the following fields:
 - All required fields must be included to successfully create an account.
 - Passwords should comply with security best practices (e.g., minimum length, complexity).
 - The endpoint expects JSON format; content type must be set to `application/json`.
+
+---
+
+---
+
+### [POST] /api/login
+
+# ▶️ Description
+
+    - No description
+
+- **idNumber**: `string` => required
+- **password**: `string` => required
+
+---
 
 ---
