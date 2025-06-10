@@ -1,7 +1,7 @@
 # 📄 Documentation
 
 * [`api/register`](#api-register) => text(register an account)
-* [`api/registers`](#api-registers) => text(register an account)
+* [`api/registers`](#api/register) => text(register an account)
 ---
 
 ## `api/register`
@@ -40,7 +40,7 @@ The request body must be a JSON object containing the following fields:
 
 ---
 
-## `api/registers`
+### api/register
 
 ### ▶️ Description  
 Registers a new user account by accepting user details and returning a confirmation response.
