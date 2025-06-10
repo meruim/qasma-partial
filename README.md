@@ -1,12 +1,13 @@
 # 📄 Documentation
 
-* [`[POST] /api/register`](#post-apiregister) => text(register an account)
-  
+- [`[POST] /api/register`](#post-apiregister) => text(register an account)
+
 ---
 
 ### [POST] /api/register
 
-# ▶️ Description  
+# ▶️ Description
+
 Registers a new user account by accepting user details and returning a confirmation response.
 
 ---
@@ -36,12 +37,12 @@ The request body must be a JSON object containing the following fields:
 - **contact_number**: `string` => required
 - **facebook**: `string` => not required
 
-
 ---
 
-## 💡 Notes  
-- All required fields must be included to successfully create an account.  
-- Passwords should comply with security best practices (e.g., minimum length, complexity).  
-- The endpoint expects JSON format; content type must be set to `application/json`.  
+## 💡 Notes
+
+- All required fields must be included to successfully create an account.
+- Passwords should comply with security best practices (e.g., minimum length, complexity).
+- The endpoint expects JSON format; content type must be set to `application/json`.
 
 ---
