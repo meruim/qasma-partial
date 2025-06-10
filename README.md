@@ -1,11 +1,12 @@
 # 📄 Documentation
 
-- [`[POST] /api/register`](#post-apiregister) => text(register an account)
-- [`[POST] /api/login`](#post-apilogin) => text(register an account)
+- [`[POST] /api/auth/register`](#post-apiauthregister) => text(register an account)
+- [`[POST] /api/auth/login`](#post-apiauthlogin) => login an account
+- [`[GET] /api/user/`](#get-apiuser) => get all users
 
 ---
 
-### [POST] /api/register
+### [POST] /api/auth/register
 
 # ▶️ Description
 
@@ -48,9 +49,7 @@ The request body must be a JSON object containing the following fields:
 
 ---
 
----
-
-### [POST] /api/login
+### [POST] /api/auth/login
 
 # ▶️ Description
 
@@ -60,5 +59,13 @@ The request body must be a JSON object containing the following fields:
 - **password**: `string` => required
 
 ---
+
+---
+
+### [GET] /api/user/
+
+# ▶️ Description
+
+    - No description
 
 ---
