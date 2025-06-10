@@ -1,7 +1,7 @@
 # 📄 Documentation
 
 * [`api/register`](#api-register) => text(register an account)
-* [`api/registers`](#api-register) => text(register an account)
+* [`api/registers`](#api-registers) => text(register an account)
 ---
 
 ## `api/register`
