@@ -1,7 +1,7 @@
 # 📄 Documentation
 
 * [`api/register`](#api-register) => text(register an account)
-* [`api/registers`](# [POST] /api/register) => text(register an account)
+* [`[POST] /api/register`](#post-apiregister) => text(register an account)
 ---
 
 ## `api/register`
@@ -42,12 +42,12 @@ The request body must be a JSON object containing the following fields:
 
 ### [POST] /api/register
 
-### ▶️ Description  
+# ▶️ Description  
 Registers a new user account by accepting user details and returning a confirmation response.
 
 ---
 
-### 📤 Request Payload
+# 📤 Request Payload
 
 The request body must be a JSON object containing the following fields:
 
@@ -67,7 +67,7 @@ The request body must be a JSON object containing the following fields:
 
 ---
 
-### 💡 Notes  
+## 💡 Notes  
 - All required fields must be included to successfully create an account.  
 - Passwords should comply with security best practices (e.g., minimum length, complexity).  
 - The endpoint expects JSON format; content type must be set to `application/json`.  
