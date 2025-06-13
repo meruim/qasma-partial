@@ -1,90 +1,21 @@
-# 📄 Documentation
-
-- [`[POST] /api/auth/register`](#post-apiauthregister) => text(register an account)
-- [`[POST] /api/auth/login`](#post-apiauthlogin) => login an account
-- [`[GET] /api/user/`](#get-apiuser) => get all users
-
----
-
-### [POST] /api/auth/register
-
-# ▶️ Description
-
-Registers a new user account by accepting user details and returning a confirmation response.
-
----
-
-# 📤 Request Payload
-
-The request body must be a JSON object containing the following fields:
-
-# UserStudentSchema Fields
-
-- **idNumber**: `string` => required
-- **email**: `string` => required
-- **password**: `string` => required
-- **role**: `string` => not required (default: 'student')
-- **isVerified**: `boolean` => not required (default: false)
-- **isActive**: `boolean` => not required (default: false)
-- **course**: `string` => required
-- **block**: `string` => not required
-- **year_level**: `number` => required
-- **first_name**: `string` => required
-- **last_name**: `string` => required
-- **middle_name**: `string` => not required
-- **suffix**: `string` => required
-- **gender**: `string` => not required (default: 'other')
-- **date_of_birth**: `date` => required
-- **address**: `string` => not required
-- **contact_number**: `string` => required
-- **facebook**: `string` => not required
-
----
-
-## 💡 Notes
-
-- All required fields must be included to successfully create an account.
-- Passwords should comply with security best practices (e.g., minimum length, complexity).
-- The endpoint expects JSON format; content type must be set to `application/json`.
-
----
-
-### [POST] /api/auth/login
-
-# ▶️ Description
-
-    - No description
-
-- **idNumber**: `string` => required
-- **password**: `string` => required
-
----
-
----
-
-### [GET] /api/user/
-
-# ▶️ Description
-
-    - No description
-
----
-
-Here’s the entire setup guide in one markdown block:
+Sure! Here’s the markdown code for creating a dropdown menu labeled "Docker Mongo Setup". This can be used in platforms that support collapsible sections in markdown, such as GitHub or GitLab.
 
 ````markdown
-# Setting Up MongoDB with Docker
+<details>
+  <summary>Docker Mongo Setup</summary>
 
-Follow these steps to set up MongoDB using Docker.
+  # Setting Up MongoDB with Docker
 
-## 1. Install Docker
-If you haven't installed Docker yet, download and install it from the [Docker official website](https://www.docker.com/get-started).
+  Follow these steps to set up MongoDB using Docker.
 
-## 2. Pull MongoDB Image
-Once Docker is installed, open your terminal or command prompt and pull the MongoDB Docker image from Docker Hub by running the following command:
+  ## 1. Install Docker
+  If you haven't installed Docker yet, download and install it from the [Docker official website](https://www.docker.com/get-started).
 
-```bash
-docker pull mongo
+  ## 2. Pull MongoDB Image
+  Once Docker is installed, open your terminal or command prompt and pull the MongoDB Docker image from Docker Hub by running the following command:
+
+  ```bash
+  docker pull mongo
 ````
 
 ## 3. Run MongoDB Container
@@ -149,8 +80,7 @@ This will mount your local directory (`/your/local/directory`) to MongoDB's data
 
 Now you have MongoDB running on Docker! You can connect to it using `mongosh`, manage containers, and even configure custom settings. Let me know if you need further help!
 
+</details>
 ```
 
-You can copy and paste this markdown in one go!
-```
-
+When you render this markdown, it will show a collapsible section labeled "Docker Mongo Setup". When clicked, it will expand to reveal the full content.
