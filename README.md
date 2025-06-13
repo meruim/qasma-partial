@@ -1,21 +1,18 @@
-Sure! Here’s the markdown code for creating a dropdown menu labeled "Docker Mongo Setup". This can be used in platforms that support collapsible sections in markdown, such as GitHub or GitLab.
+Here’s the entire setup guide in one markdown block:
 
 ````markdown
-<details>
-  <summary>Docker Mongo Setup</summary>
+# Setting Up MongoDB with Docker
 
-  # Setting Up MongoDB with Docker
+Follow these steps to set up MongoDB using Docker.
 
-  Follow these steps to set up MongoDB using Docker.
+## 1. Install Docker
+If you haven't installed Docker yet, download and install it from the [Docker official website](https://www.docker.com/get-started).
 
-  ## 1. Install Docker
-  If you haven't installed Docker yet, download and install it from the [Docker official website](https://www.docker.com/get-started).
+## 2. Pull MongoDB Image
+Once Docker is installed, open your terminal or command prompt and pull the MongoDB Docker image from Docker Hub by running the following command:
 
-  ## 2. Pull MongoDB Image
-  Once Docker is installed, open your terminal or command prompt and pull the MongoDB Docker image from Docker Hub by running the following command:
-
-  ```bash
-  docker pull mongo
+```bash
+docker pull mongo
 ````
 
 ## 3. Run MongoDB Container
@@ -66,21 +63,4 @@ If you want to stop or start the MongoDB container:
   docker start mongodb
   ```
 
-## 7. Optional: Set Up MongoDB with Custom Configuration
-
-If you want to use a custom configuration or mount a volume to persist data, you can run MongoDB with the following command:
-
-```bash
-docker run --name mongodb -d -p 27017:27017 -v /your/local/directory:/data/db mongo
 ```
-
-This will mount your local directory (`/your/local/directory`) to MongoDB's data directory (`/data/db`), allowing you to persist data across container restarts.
-
-## Conclusion
-
-Now you have MongoDB running on Docker! You can connect to it using `mongosh`, manage containers, and even configure custom settings. Let me know if you need further help!
-
-</details>
-```
-
-When you render this markdown, it will show a collapsible section labeled "Docker Mongo Setup". When clicked, it will expand to reveal the full content.
