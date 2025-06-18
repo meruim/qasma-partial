@@ -54,16 +54,15 @@ The request body must be a JSON object containing the following fields:
  
 The `other_info` object will vary depending on the role chosen. Below are the fields for each role:
  
-| **Role**    | **Fields**                      |
-|-------------|----------------------------------|
-| **Student** | course: string                  |
-|             | yearLevel: number                |
-|             | section: string                 |
-| **Staff**   | department: string              |
-|             | position: string                |
-| **Counselor**| specialization: string          |
-|             | availableDays: string[]         |
-|             | roomNumber: string              |
+| Role   | Fields     |
+|--------|------------|
+| staff  | Position   |
+|        | department |
+|        | special    |
+| student| course     |
+|        | year       |
+|        | level      |
+
  
 ### Example:
  
