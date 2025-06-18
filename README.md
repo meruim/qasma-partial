@@ -54,14 +54,33 @@ The request body must be a JSON object containing the following fields:
  
 The `other_info` object will vary depending on the role chosen. Below are the fields for each role:
  
-| Role   | Fields     |
-|--------|------------|
-| staff  | Position   |
-|        | department |
-|        | special    |
-| student| course     |
-|        | year       |
-|        | level      |
+<table border="1">
+  <tr>
+    <th>Role</th>
+    <th>Fields</th>
+  </tr>
+  <tr>
+    <td rowspan="3">staff</td>
+    <td>Position</td>
+  </tr>
+  <tr>
+    <td>department</td>
+  </tr>
+  <tr>
+    <td>special</td>
+  </tr>
+  <tr>
+    <td rowspan="3">student</td>
+    <td>course</td>
+  </tr>
+  <tr>
+    <td>year</td>
+  </tr>
+  <tr>
+    <td>level</td>
+  </tr>
+</table>
+
 
 
  
