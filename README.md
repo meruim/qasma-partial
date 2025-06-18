@@ -54,10 +54,10 @@ The request body must be a JSON object containing the following fields:
  
 The `other_info` object will vary depending on the role chosen. Below are the fields for each role:
  
-<table border="1">
+<table border="1" style="width: 100%; border-collapse: collapse;">
   <tr>
-    <th>Role</th>
-    <th>Fields</th>
+    <th style="text-align: center;">Role</th>
+    <th style="text-align: center;">Fields</th>
   </tr>
   <tr>
     <td rowspan="3">staff</td>
@@ -80,6 +80,7 @@ The `other_info` object will vary depending on the role chosen. Below are the fi
     <td>level</td>
   </tr>
 </table>
+
 
 
 
