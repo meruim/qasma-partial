@@ -1,457 +1,752 @@
-# 📄 Documentation
- 
+## Authentication
+
 - [`[POST] /api/auth/register`](#post-apiauthregister) => register an account
-- [`[GET] /profile`](#get-profile) => Get Data
-- [`[POST] /api/auth/login`](#post-apiauthlogin) => Login
-- [`[PUT] /info?id=1`](#put-info?id=1) => Update Data
-- [`[DEL] /info?id=1`](#del-info?id=1) => Delete Data
-- [`[GET] /api/user/`](#get-api/user) => Get All Users
-- [`[GET] /user/getUserById/68469e1ef430dfbabd85b276`](#get-usergetUserById68469e1ef430dfbabd85b276) => Get Profile
-- [`[POST] /auth/forgot-password`](#post-apiauthregister) => Forgot password
-v
-- [`[POST] /api/otp/generate`](#post-apiauthregister) => Generate OTP
-- [`[POST] /otp/validate`](#post-apiauthregister) => OTP Validate
-- [`[POST] /api/auth/logout`](#post-apiauthregister) => Logout
-- [`[POST] /`](#post-apiauthregister) => New Request
-- [`[POST] /`](#post-apiauthregister) => Current User
+- [`[POST] /api/auth/verify`](#post-apiauthverify) => verify an account
+- [`[POST] /api/auth/login`](#post-apiauthlogin) => login to the account
+- [`[PATCH] /api/auth/update`](#patch-apiauthupdate) => update user profile
+- [`[POST] /api/auth/forgot-password`](#post-apiauthforgot-password) => forgot password
+- [`[PATCH] /api/auth/reset-password`](#patch-apiauthreset-password) => reset password
+- [`[POST] /api/auth/logout`](#post-apiauthlogout) => logout from the account
+- [`[POST] /api/auth/refresh`](#post-apiauthrefresh) => refresh authentication token
+
 ---
- 
+
+## User Management
+
+- [`[POST] /api/user/`](#post-apiuser) => create a new user
+- [`[GET] /api/user/`](#get-apiuser) => get all users
+- [`[GET] /api/user/getProfile/:idNumber`](#get-apiusergetprofileidnumber) => get user profile by ID number
+- [`[GET] /api/user/getUserById/:uid`](#get-apiusergetuserbyiduid) => get user by UID
+- [`[GET] /api/user/current`](#get-apiusercurrent) => get current user profile
+
+---
+
+## Appointment
+
+- [`[POST] /api/appointment/create`](#post-apiappointmentcreate) => create an appointment
+- [`[GET] /api/appointment/getAll`](#get-apiappointmentgetall) => get all appointments
+- [`[GET] /api/appointment/getById/:appointmentId`](#get-apiappointmentgetbyidappointmentid) => get appointment by ID
+- [`[PATCH] /api/appointment/update`](#patch-apiappointmentupdate) => update an appointment
+- [`[PATCH] /api/appointment/cancel`](#patch-apiappointmentcancel) => cancel an appointment
+- [`[PUT] /api/appointment/accept`](#put-apiappointmentaccept) => accept an appointment
+- [`[PUT] /api/appointment/verify`](#put-apiappointmentverify) => verify an appointment
+
+---
+
+## Config
+
+- [`[POST] /api/config/create`](#post-apiconfigcreate) => create a new appointment configuration
+- [`[PATCH] /api/config/update`](#patch-apiconfigupdate) => update appointment configuration
+
+---
+
 ## `[POST]` /api/auth/register
- 
-###  Description
- 
+
+### Description
+
 Registers a new user account by accepting user details and returning a confirmation response.
- 
- 
-###  Request Payload
- 
+
+### Request Payload
+
 The request body must be a JSON object containing the following fields:
- 
-### UserSchema Fields
- 
+
+#### Fields
+
 - **idNumber**: `string` => required
 - **email**: `string` => required
 - **password**: `string` => required
-- **role**: `string` => not required (default: 'student')
-- **isVerified**: `boolean` => not required (default: false)
-- **isActive**: `boolean` => not required (default: false)
-- **course**: `string` => required
-- **block**: `string` => not required
-- **year_level**: `number` => required
+- **role**: `string` => required (default: 'student')
+- **verified**: `boolean` => not required (default: false)
+- **active**: `boolean` => not required (default: false)
 - **first_name**: `string` => required
 - **last_name**: `string` => required
 - **middle_name**: `string` => not required
-- **suffix**: `string` => required
-- **gender**: `string` => not required (default: 'other')
+- **suffix**: `string` => not required
+- **gender**: `string` => not required `[accept: male, female, and other]` (default: 'other')
 - **date_of_birth**: `date` => required
 - **address**: `string` => not required
 - **contact_number**: `string` => required
 - **facebook**: `string` => not required
-- **other_info**: `[object]` => 
+- **other_info**: `[object]` => fields is base on the role see in the table below:
+
 ---
- 
-### Other_info : Description
- 
+
 The `other_info` object will vary depending on the role chosen. Below are the fields for each role:
- 
-<table border="1" style="width: 100%; border-collapse: collapse;">
-  <tr>
-    <th style="text-align: center;">Role</th>
-    <th style="text-align: center;">Fields</th>
-  </tr>
-  <tr>
-    <td rowspan="3">staff</td>
-    <td>Position</td>
-  </tr>
-  <tr>
-    <td>department</td>
-  </tr>
-  <tr>
-    <td>special</td>
-  </tr>
-  <tr>
-    <td rowspan="3">student</td>
-    <td>course</td>
-  </tr>
-  <tr>
-    <td>year</td>
-  </tr>
-  <tr>
-    <td>level</td>
-  </tr>
+
+  <style>
+    table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+           padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+
+<table>
+    <tr>
+        <th>Role</th>
+        <th>Fields</th>
+    </tr>
+    <tr>
+        <td rowspan="1"><strong>student</strong></td>
+        <td>
+          <ul>
+                <li>course: <code>string</code> <span class="highlight">=> required</span></li>
+                <li>yearLevel: <code>number</code> <span class="required">=> required</span></li>
+                <li>block: <code>string</code><span class="required">=> required</span></li>
+            </ul>
+    </tr>
+    <tr>
+    <td rowspan="1"> <string>staff</strong></td>
+     <td>
+          <ul>
+                <li>department: <code>string</code>  <span class="required">=> required</span></li>
+                <li>position: <code>string</code>  <span class="required">=> required</span></li>
+    <tr>
+    <td rowspan="1"> <string>counselor</strong></td>
+     <td>
+          <ul>
+                <li>specialization: <code>string</code> <span class="required">=> required</span></li>
+                <li>notAvailableSched: <code>string[]</code>  <span class="required">=> required</span></li>
+                <li>roomNumber: <code>string</code> <span class="required">=> required</span></li>
+            </ul>
+    </tr>
 </table>
 
+### Response
 
+The response will contain the following:
 
+- **status**: `boolean` => `true` if registration is successful, `false` otherwise
+- **document**: `object` => contains relevant user registration documents or data, if applicable
+- **otpResponse**: `object` => response related to OTP validation (could include OTP sent status, expiration time, etc.)
+- **error?**: `object` => an optional error field that provides error details if the registration fails (e.g., validation errors, missing fields, etc.)
 
- 
-### Example:
- 
- 
- 
-``` json
+### Example Request:
+
+```json
 {
+  "idNumber": "123456789",
+  "email": "example@email.com",
+  "password": "password123",
+  "role": "student",
+  "course": "BSIS",
+  "block": "B",
+  "year_level": 4,
+  "first_name": "John",
+  "last_name": "Doe",
+  "middle_name": "Smith",
+  "suffix": "Jr",
+  "gender": "other",
+  "date_of_birth": "2000-01-01",
+  "address": "123 Main St, City, Country",
+  "contact_number": "09123456789",
+  "facebook": "https://facebook.com/johndoe",
   "course": "BSIS",
   "yearLevel": "4",
-  "block": "B"
-}
- ```
- 
-## `[GET]` /profile
- 
- 
-###  Description
- 
-This GET request retrieves data from an endpoint using query parameters (e.g., id=1). A successful response returns a 200 OK status with a response body, such as HTML or JSON data. No request body is needed for GET requests.
- 
- 
-## `[POST]` /api/auth/login
- 
- 
-###  Description
-This POST request sends JSON data (e.g., idNumber and password) via the request body to the API. A successful response typically returns a 200 OK or 201 Created status code, with the data reflected in the response.
- 
-### Request Payload
-The request body must be a JSON object containing the following fields:
-- idNumber (string): The unique identifier for the user.
-- password (string): The user's password.
- 
-### Login Fields
-``` json
-{
-	  "idNumber": "KC-22-A-00324",
-      "password": "jojogret"
-}
- ```
- 
- 
-## `[PUT]` /info?id=1
- 
-###  Description
-This PUT request is used to overwrite existing data. It modifies an entity (identified by an identifier in the URL, e.g., id=1). A successful response typically returns a 200 OK, 201 Created, or 204 No Content status code.
- 
-### Request Payload 
-The request body must be a JSON object containing the fields you want to update. In this case, the example shows a field to update the `name` of the user.
- 
- 
-``` json
-{
-	"name": "Add your name in the body"
-}
- ```
- 
- 
-## `[DEL]` /info?id=1
- 
- 
-###  Description
-This DELETE request removes data created via a POST request. The entity to be deleted is identified by an identifier in the URL (e.g., id=1). A successful response typically returns a 200 OK, 202 Accepted, or 204 No Content status code.
- 
-## `[GET]` /api/user/
- 
-###  Description
- 
- 
-This endpoint retrieves information about users from the system. It is a simple GET request that returns user data.
- 
-### Request Parameters:
-No specific parameters are required. Simply send a GET request to the URL.
- 
-### Expected Response:
-A successful response returns a JSON object with:
- 
-- `id`: Unique identifier for the user.
- 
-- `name`: The name of the user.
- 
-- `email`: The email address associated with the user.
- 
-- `created_at`: Timestamp of when the user was created.
- 
-- `updated_at`: Timestamp of the last update made to the user information.
- 
-### Notes
- 
-- Ensure necessary permissions to access user data.
- 
-- The response may vary based on user role and permissions.
- 
-- Handle errors like unauthorized access or user not found.
- 
-## `[GET]` /user/getUserById/68469e1ef430dfbabd85b276`
- 
- 
-###  Description
- 
-This endpoint retrieves the details of a user based on the provided user ID.
- 
-#### Request
- 
-- **Method:** GET
- 
-- **URL:** `{{base_url}}/user/getUserById/{userId}`
- 
-- **Path Parameter:**
- 
-    - `userId` (string): e unique identifier of the user (e.g., 68469e1ef430dfbabd85b276).
- 
- 
-#### Response
-A successful response returns the user's details in JSON format, including:
- 
-- `id`: The unique identifier of the user.
- 
-- `name`: The name of the user.
- 
-- `email`: The email address of the user.
- 
-- `createdAt`: The timestamp when the user was created.
- 
-- `updatedAt`: The timestamp of the last update made to the user's details.
- 
- 
-#### Notes
- 
-- Ensure the provided user ID is valid to avoid errors.
-- A 404 Not Found status is returned if the user is not found.
-- Authentication may be required based on API security settings.
- 
- 
-## `[POST]` /auth/forgot-password
- 
-###  Description
- 
-This endpoint allows users to reset their password by providing their identification details and a new password.
- 
-#### Request Format
- 
-- **Method**: POST
- 
-- **Endpoint**: `{{base_url}}/auth/forgot-password`
- 
-- **Content-Type**: application/json
- 
- 
-#### Request Body
- 
-- **newPassword** (string): The new password that the user wishes to set.
- 
-- **idNumber** (string): The user's identification number.
- 
-- **code** (string): A verification code associated with the password reset process.
- 
- 
-**Example Request Body**:
- 
-``` json
-{
-  "newPassword": "password1234",
-  "idNumber": "2025001",
-  "code": "1233455"
-}
- 
- ```
- 
-#### Response Structure
- 
-- **status** (string):  Success or error status.
- 
-- **message** (string): Description of the result.
- 
-#### Notes
-Ensure to handle the response based on the status.
- 
- 
- 
-## `[POST]` /api/otp/generate
- 
-###  Description
-This endpoint is used to generate a One-Time Password (OTP) for a specified purpose, such as password recovery.
- 
-### Request
- 
-- **Method**: POST
- 
-- **URL**: `{{base_url}}/api/otp/generate`
- 
- 
-#### Request Body
- 
-The request body must be in JSON format and include the following parameters:
- 
-- `email` (string): The user's email address to receive the OTP.
- 
-- `purpose` (string): The purpose of the OTP (e.g., "FORGOT_PASSWORD" for password recovery).
- 
- 
-### Expected Response
-A successful response confirms that the OTP has been sent, including any relevant information about the OTP process.
- 
- 
-### Notes
- 
-- Ensure the provided email is valid and accessible by the user.
-- Define the purpose parameter clearly to avoid confusion.
- 
- 
- 
-## `[POST]` /otp/validate
-###  Description
-This endpoint generates a One-Time Password (OTP) for a specified purpose, such as password recovery.
- 
-### Request
- 
- 
-**Method:** POST  
-**URL:** `{{base_url}}/otp/validate`
- 
-#### Request Body
- 
- 
- 
-- **email** (string): The user's email address.
-- **code** (string): The OTP code received by the user. 
-- **purpose** (string): The purpose for validating the OTP (e.g., "FORGOT_PASSWORD").
- 
- 
- 
- 
-### Example of a valid request body:
- 
-``` json
-{
-  "email": "user@example.com",
-  "code": "123456",
-  "purpose": "FORGOT_PASSWORD"
-}
- 
- ```
- 
-### Response
- 
-A success response include:
- 
-- **status** (string): The result of the OTP validation.
-- **message** (string): A description of the validation result.
-- **data** (object): Additional data related to the user's account or session.
- 
- 
-### Example Response
- 
-``` json
-{
-  "status": "success",
-  "message": "OTP validated successfully.",
-  "data": {
-    "userId": "12345",
-    "sessionToken": "abcde12345"
+  "block": "B",
+  "other_info": {
+    "course": "BSIS",
+    "yearLevel": "4",
+    "block": "B"
   }
 }
- 
- ```
- 
-### Notes
- 
-- Ensure the provided email is registered in the system
-- The OTP is time-sensitive and should be used promptly to avoid expiration.
- 
- 
+```
+
+If the registration is successful, a verification code will be sent to the registered email. You can then go [`verify`](#post-apiauthverify), which will call the verification API.
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[POST]` /api/auth/verify
+
+### Description
+
+Verifies the account of a user by accepting verification details and returning a confirmation response.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields:
+
+#### Fields
+
+- **email**: `string` => required
+- **code**: `string` => required
+
+### Response
+
+The response will contain a confirmation of the verification process:
+
+- **status**: `boolean` => `true` if registration is successful, `false` otherwise
+
+### Example Request
+
+```json
+{
+  "email": "user@example.com",
+  "code": "123456"
+}
+```
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[POST]` /api/auth/login
+
+### Description
+
+Logs a user into their account using provided credentials and returns an authentication token.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields:
+
+#### Fields
+
+- **idNumber**: `string` => required
+- **password**: `string` => required
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if login is successful, `false` otherwise
+- **document**:
+
+  - **token**: `object` => contains the `accessToken` and `refreshToken`
+  - **user**: `object` => the user’s data
+
+- **error?**: `object` => an optional error field that provides error details if the login fails (e.g., incorrect credentials)
+
+### Example Request
+
+```json
+{
+  "idNumber": "123456789",
+  "password": "password123"
+}
+```
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[PATCH]` /api/auth/update
+
+### Description
+
+Updates the profile of a logged-in user by modifying the user’s details based on the authenticated context.
+
+### Authorization
+
+This endpoint requires a **Bearer Token** in the request header. The token should be provided as follows:
+
+```http
+Authorization: Bearer {accessToken}
+```
+
+The `accessToken` must correspond to a user with the role of `Student`,`Staff` or `Counselor`. If the role is anything other than else, the request will be forbidden.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields:
+
+#### Fields
+
+- **idNumber**: `string` => required (used to identify the user)
+- **email**: `string` => required (used to verify if you are the owner)
+- **password**: `string` => requiered
+- **role**: `string` => optional (default: 'student')
+- **verified**: `boolean` => optional (default: false)
+- **active**: `boolean` => optional (default: false)
+- **first_name**: `string` => optional
+- **last_name**: `string` => optional
+- **middle_name**: `string` => optional
+- **suffix**: `string` => optional
+- **gender**: `string` => optional `[accept: male, female, and other]` (default: 'other')
+- **date_of_birth**: `date` => optional
+- **address**: `string` => optional
+- **contact_number**: `string` => optional
+- **facebook**: `string` => optional
+- **other_info**: `[object]` => optional, based on the role
+  [see here](#post-apiauthregister)
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the update is successful, `false` otherwise
+- **document**:
+
+  - **user**: `object` => the updated user’s data (e.g., `idNumber`, `email`, `first_name`, etc.)
+
+- **error?**: `object` => an optional error field that provides error details if the update fails (e.g., missing fields, invalid data)
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[POST]` /api/auth/forgot-password
+
+### Description
+
+Sends a password reset code to the user's email to allow them to reset their password. If the reset code is successfully sent, the user will be directed to a password reset page where they can confirm the code and provide a new password.
+
+### Request Payload
+
+The request body must be a JSON object containing one of the following fields:
+
+#### Fields
+
+- **idNumber**: `string` => required
+
+  **OR**
+
+- **email**: `string` => required
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the reset code is sent successfully, `false` otherwise
+- **error?**: `object` => optional field that provides error details if there’s a problem with the request (e.g., invalid `idNumber` or `email`, user not found)
+
+### Example Response
+
+```json
+{
+  "success": true
+}
+```
+
+If the success is `true`, direct the user to [<u>reset-password</u>](#patch-apiauthreset-password) to confirm the reset verfication code and provide a new password.
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[PATCH]` /api/auth/reset-password
+
+### Description
+
+Resets the password for a user by verifying their email or ID and accepting a new password.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields:
+
+#### Fields
+
+- **idNumber**: `string` => required (if using `idNumber`)
+- **email**: `string` => required (if using `email`)
+- **newPassword**: `string` => required (the new password the user wants to set)
+- **code**: `string` => required (the password reset code that was sent to the user)
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the password is successfully reset, `false` otherwise
+- **error?**: `object` => optional field that provides error details if the reset fails (e.g., invalid code, user not found)
+
+### Example Response
+
+```json
+{
+  "success": true
+}
+```
+
+[Back to top ↑](#authentication)
+
+---
+
 ## `[POST]` /api/auth/logout
- 
- 
-###  Description
-Logs out a user by invalidating the provided access and refresh tokens.
- 
-### HTTP Method
- 
-`POST`
- 
-### Endpoint
- 
-`{{base_url}}/api/auth/logout`
- 
+
+### Description
+
+Logs the user out of their session and invalidates the authentication token.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields:
+
+#### Fields
+
+- **accessToken**: `string` => required (the access token of the user)
+- **refreshToken**: `string` => required (the refresh token of the user)
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the logout is successful, `false` otherwise
+- **error?**: `object` => optional field that provides error details if the logout fails (e.g., invalid token, session not found)
+
+### Example Response
+
+```json
+{
+  "success": true
+}
+```
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[POST]` /api/auth/refresh
+
+### Description
+
+Refreshes the authentication token for the user to maintain their logged-in state. If the access token expires, a new access token and refresh token will be generated. These two tokens must be stored with every request.
+
+### Request Payload
+
+The request body must be a JSON object containing the following field:
+
+#### Fields
+
+- **refreshToken**: `string` => required (the refresh token of the user)
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the token refresh is successful, `false` otherwise
+- **token**:
+
+  - **accessToken**: `string` => new access token
+  - **refreshToken**: `string` => new refresh token
+
+- **error?**: `object` => optional field that provides error details if the refresh fails (e.g., invalid or expired refresh token)
+
+### Example Request
+
+```json
+{
+  "refreshToken": "myRefreshToken123456"
+}
+```
+
+[Back to top ↑](#authentication)
+
+---
+
+## `[POST]` /api/user/
+
+### Description
+
+Creates a new user account by accepting user details and returning a confirmation response. This operation is restricted to users with `Counselor` or `Staff` roles.
+
+### Request Payload
+
+The request body must be a JSON object containing the following fields (similar to the registration process):
+
+#### Fields
+
+- **idNumber**: `string` => required
+- **email**: `string` => required
+- **password**: `string` => required
+- **role**: `string` => required (default: 'student')
+- **verified**: `boolean` => not required (default: false)
+- **active**: `boolean` => not required (default: false)
+- **first_name**: `string` => required
+- **last_name**: `string` => required
+- **middle_name**: `string` => not required
+- **suffix**: `string` => not required
+- **gender**: `string` => not required `[accept: male, female, and other]` (default: 'other')
+- **date_of_birth**: `date` => required
+- **address**: `string` => not required
+- **contact_number**: `string` => required
+- **facebook**: `string` => not required
+- **other_info**: `[object]` => optional, based on the role [see here](#post-apiauthregister)
+
+### Authorization
+
+This endpoint requires a **Bearer Token** in the request header. The token should be provided as follows:
+
+```http
+Authorization: Bearer {accessToken}
+```
+
+The `accessToken` must correspond to a user with the role of `Staff` or `Counselor`. If the role is anything other than `Staff` or `Counselor`, the request will be forbidden.
+
+### Response
+
+The response will contain the following:
+
+- **success**: `boolean` => `true` if the user was created successfully, `false` otherwise
+- **document**: `object` => the created user’s data
+- **error?**: `object` => optional field that provides error details if the creation fails (e.g., invalid access token, forbidden role)
+
+### Example Request
+
+```json
+{
+  "idNumber": "KC-A-1234",
+  "email": "user@example.com",
+  "password": "password123",
+  "role": "student",
+  "first_name": "John",
+  "last_name": "Doe",
+  "date_of_birth": "2000-01-01",
+  "contact_number": "09123456789",
+  "facebook": "https://facebook.com/johndoe",
+  "course": "BSIS",
+  "yearLevel": "4",
+  "block": "B",
+  "other_info": {
+    "course": "BSIS",
+    "yearLevel": "4",
+    "block": "B"
+  }
+}
+```
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "user": {
+    "idNumber": "123456789",
+    "email": "user@example.com",
+    "first_name": "John",
+    "last_name": "Doe"
+    // ....the rest
+  }
+}
+```
+
+[Back to top ↑](#user-management)
+
+---
+
+## `[GET]` /api/user/
+
+### Description
+
+Fetches a list of all users. This operation is **restricted** and only accessible by users with `Counselor` or `Staff` roles.
+
+### Authorization
+
+This endpoint requires a **Bearer Token** in the request header. The token should be provided as follows:
+
+```http
+Authorization: Bearer {accessToken}
+```
+
+The `accessToken` must correspond to a user with the role of `Staff` or `Counselor`. If the role is anything other than `Staff` or `Counselor`, the request will be forbidden.
+
 ### Request Parameters
- 
-- **accessToken** (string): The token granting access to the user's session.
-- **refreshToken** (string): The token used to obtain a new access token.
- 
- 
-### Expected Response
-Upon successful logout:
- 
-- **Status Code**: `401`
- 
-- **Content-Type**: `application/json`
- 
-- { "success": true, "error": { "status": 0, "message": "", "suggestions": \[\] }}
- 
-The success field indicates the outcome, while the error object provides additional details, such as status, message, and suggestions.
- 
- 
- 
-## `[POST]` /
- 
- 
-###  Description
-This endpoint is designed to accept data submissions from clients. It allows users to send specific information in the request body, which will be processed by the server.
- 
-### Request Body Format
- 
-The request body must be formatted as `form-data` or `x-www-form-urlencoded`. Each key in the request body represents a separate parameter. The parameters are as follows:
- 
-- **Parameter1**: (type: text) Description of Parameter1.
- 
-- **Parameter2**: (type: text) Description of Parameter2.
- 
-- **Parameter3**: (type: file) Description of Parameter3.
- 
- 
-### Expected Response Format
- 
-Upon successful processing, the server will return a response with:
- 
-- **Status**: Indicates success or failure.
- 
-- **Message**: A descriptive message about the request outcome.
- 
-- **Data**: Relevant data related to the request, formatted as per the API's specifications.
- 
-### Notes
-Ensure the request body follows the specified format to receive the expected response.
- 
- 
- 
-## `[GET]` /
- 
- 
-###  Description
- 
-This endpoint retrieves data based on specified parameters, providing the necessary information by querying the server.
- 
-### Request Parameters
- 
-- **Parameter 1**: Description of what this parameter does.
- 
-- **Parameter 2**: Description of what this parameter does.
- 
-- **Parameter 3**: Description of what this parameter does.
- 
- 
-### Expected Response
- 
-The response will contain the following fields:
- 
-- **Field 1**: Description of what this field represents.
- 
-- **Field 2**: Description of what this field represents.
- 
-- **Field 3**: Description of what this field represents.
- 
- 
-### Notes
- 
-- Ensure all required parameters are included to receive a successful response.
- 
-- The response will be in JSON format.
- 
-- Handle any potential errors by checking the response status code.
+
+You can use the following query parameters:
+
+- **query**: `object` => optional filter query (e.g., search criteria or conditions)
+- **sort**: `object` => optional sorting options (e.g., sort by `createdAt`, `name`, etc.)
+- **page**: `number` => required (the page number, default is `1`)
+- **limit**: `number` => required (the number of results per page, default is `10`)
+- **searchTerm**: `string` => optional search term to filter users (e.g., name, email, etc.)
+- **paginate**: `boolean` => required (set to `true` to paginate results)
+- **includeDeleted**: `boolean` => optional (set to `true` to include deleted users, `false` to exclude deleted users)
+
+### Example Request
+
+To fetch the first page of users, with 10 results per page, and a search for users with the term "anna", while including deleted users:
+
+```http
+GET /api/user/?page=1&limit=10&searchTerm=anna&paginate=true&includeDeleted=true
+```
+
+You can also adjust the query parameters like `query` or `sort` as needed.
+
+### Example Response
+
+```json
+{
+  "success": true,
+  "total": 3,
+  "_results": 3,
+  "results": 3,
+  "documents": [
+    {
+      "_id": "6853a8809da8fa1dd7f7e903",
+      "idNumber": "KC-123",
+      "email": "student@student.com",
+      "role": "student",
+      "verified": true,
+      "active": true,
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "gender": "female",
+      "date_of_birth": "1990-03-10T00:00:00.000Z",
+      "contact_number": "09178889900",
+      "address": "Poblacion, Katipunan",
+      "facebook": "https://facebook.com/first.last",
+      "other_info": {
+        "course": "BSIS",
+        "yearLevel": "3",
+        "section": "marang"
+      },
+      "deletedAt": "2025-06-20T06:04:03.089Z", // Deleted user
+      "createdAt": "2025-06-19T06:04:48.107Z",
+      "updatedAt": "2025-06-19T06:04:48.107Z"
+    }
+  ],
+  "page": 1,
+  "limit": 10
+}
+```
+
+NOTE: to make work the `searchTerm`, you must allowed a certain fields like this on the example:
+
+```typescript
+class UserService extends BaseService<
+  IUserModel,
+  UserStudentMongooseRepository
+> {
+  constructor() {
+    this.allowedFilterFields = ['role']; //you can add more here
+  }
+}
+```
+
+[Back to top ↑](#user-management)
+
+---
+
+## `[GET]` /api/user/getProfile/:idNumber
+
+### Description
+
+Retrieves the user profile associated with a specific ID number. Accessible by `Counselor` or `Staff` roles.
+
+[Back to top ↑](#user-management)
+
+---
+
+## `[GET]` /api/user/getUserById/:uid
+
+### Description
+
+Fetches a user profile by their unique UID. Restricted to `Counselor` or `Staff` roles.
+
+[Back to top ↑](#user-management)
+
+---
+
+## `[GET]` /api/user/current
+
+### Description
+
+Retrieves the profile of the currently authenticated user. Available to `Counselor`, `Staff`, or `Student` roles.
+
+[Back to top ↑](#user-management)
+
+---
+
+## `[POST]` /api/appointment/create
+
+### Description
+
+Creates a new appointment by accepting appointment details and returning a confirmation response.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[GET]` /api/appointment/getAll
+
+### Description
+
+Fetches a list of all appointments. Accessible by `Counselor` or `Staff` roles.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[GET]` /api/appointment/getById/:appointmentId
+
+### Description
+
+Retrieves appointment details by appointment ID.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[PATCH]` /api/appointment/update
+
+### Description
+
+Updates an existing appointment.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[PATCH]` /api/appointment/cancel
+
+### Description
+
+Cancels an existing appointment.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[PUT]` /api/appointment/accept
+
+### Description
+
+Accepts an appointment. Restricted to `Staff` roles.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[PUT]` /api/appointment/verify
+
+### Description
+
+Verifies an appointment. Restricted to `Counselor` roles.
+
+[Back to top ↑](#appointment)
+
+---
+
+## `[POST]` /api/config/create
+
+### Description
+
+Creates a new appointment configuration. Restricted to `Counselor` roles.
+
+[Back to top ↑](#config)
+
+---
+
+## `[PATCH]` /api/config/update
+
+### Description
+
+Updates the appointment configuration. Restricted to `Counselor` roles.
+
+[Back to top ↑](#config)
+
+---
+
+```
+
+```
