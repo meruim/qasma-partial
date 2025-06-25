@@ -73,18 +73,18 @@ The request body must be a JSON object containing the following fields:
 
 The `other_info` object will vary depending on the role chosen. Below are the fields for each role:
 
-  <table>
+<table width="100%" border="1" cellpadding="5" cellspacing="0">
     <tr>
-        <th>Role</th>
-        <th>Fields</th>
+        <th align="center">Role</th>
+        <th align="center">Fields</th>
     </tr>
     <tr>
         <td><strong>student</strong></td>
         <td>
             <ul>
-                <li>course: <code>string</code> <span style="color: red;">=> required</span></li>
-                <li>yearLevel: <code>number</code> <span style="color: red;">=> required</span></li>
-                <li>block: <code>string</code> <span style="color: red;">=> required</span></li>
+                <li>course: <code>string</code> <strong>=> required</strong></li>
+                <li>yearLevel: <code>number</code> <strong>=> required</strong></li>
+                <li>block: <code>string</code> <strong>=> required</strong></li>
             </ul>
         </td>
     </tr>
@@ -92,8 +92,8 @@ The `other_info` object will vary depending on the role chosen. Below are the fi
         <td><strong>staff</strong></td>
         <td>
             <ul>
-                <li>department: <code>string</code> <span style="color: red;">=> required</span></li>
-                <li>position: <code>string</code> <span style="color: red;">=> required</span></li>
+                <li>department: <code>string</code> <strong>=> required</strong></li>
+                <li>position: <code>string</code> <strong>=> required</strong></li>
             </ul>
         </td>
     </tr>
@@ -101,13 +101,14 @@ The `other_info` object will vary depending on the role chosen. Below are the fi
         <td><strong>counselor</strong></td>
         <td>
             <ul>
-                <li>specialization: <code>string</code> <span style="color: red;">=> required</span></li>
-                <li>notAvailableSched: <code>string[]</code> <span style="color: red;">=> required</span></li>
-                <li>roomNumber: <code>string</code> <span style="color: red;">=> required</span></li>
+                <li>specialization: <code>string</code> <strong>=> required</strong></li>
+                <li>notAvailableSched: <code>string[]</code> <strong>=> required</strong></li>
+                <li>roomNumber: <code>string</code> <strong>=> required</strong></li>
             </ul>
         </td>
     </tr>
 </table>
+
 
 
 ### Response
